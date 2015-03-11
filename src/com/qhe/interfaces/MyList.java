@@ -10,6 +10,13 @@ package com.qhe.interfaces;
 
 public interface MyList<T> {
 	/**
+	 * Add one element at the end of list
+	 * @param element
+	 * @return true for success, false for failure
+	 */
+	public boolean add(T element);
+	
+	/**
 	 * Insert an element into the list
 	 * 
 	 * @param position, the position insert into the list
@@ -17,6 +24,15 @@ public interface MyList<T> {
 	 * @return boolean, the status of insertion, true for success 
 	 */
 	public boolean insert(int position, T element);
+	
+	/**
+	 * Replace the element at position
+	 * 
+	 * @param position, position of element to be replaced
+	 * @param element, use the element to replace the element at position
+	 * @return true for success, false for failure.
+	 */
+	public boolean replace(int position, T element);
 	
 	/**
 	 * Get item at position.
