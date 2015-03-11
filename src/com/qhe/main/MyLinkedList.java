@@ -24,7 +24,7 @@ public class MyLinkedList<T> implements MyList<T>{
 			length++;
 		} else {
 			LinkedListNode<T> node = new LinkedListNode<T>(element);
-			node.setNext(tail.next());
+			node.setNext(tail.getNext());
 			tail.setNext(node);
 			tail = node;
 			length++;
@@ -44,16 +44,16 @@ public class MyLinkedList<T> implements MyList<T>{
 		
 		if(position == 1) {
 			node = new LinkedListNode<T>(head.getData());
-			node.setNext(head.next());
+			node.setNext(head.getNext());
 			head.setNext(node);
 			head.setData(element);
 			
 		} else {
 			for(int i=1; i<position-1; i++) 
-				cur = cur.next();
+				cur = cur.getNext();
 			node = new LinkedListNode<T>(element);
 			
-			node.setNext(cur.next());
+			node.setNext(cur.getNext());
 			cur.setNext(node);
 		}
 		
@@ -70,7 +70,7 @@ public class MyLinkedList<T> implements MyList<T>{
 		}
 		LinkedListNode<T> cur = head;
 		for(int i=1; i<position; i++)
-			cur = cur.next();
+			cur = cur.getNext();
 		cur.setData(element);
 		return true;
 	}
@@ -84,7 +84,7 @@ public class MyLinkedList<T> implements MyList<T>{
 		
 		LinkedListNode<T> cur = head;
 		for(int i=1; i<position; i++)
-			cur = cur.next();
+			cur = cur.getNext();
 		return cur.getData();
 	}
 
@@ -100,15 +100,15 @@ public class MyLinkedList<T> implements MyList<T>{
 		T item = null;
 		if(position == 1) {
 			item = head.getData();
-			head.setData(head.next().getData());
-			head.setNext(head.next().next());
+			head.setData(head.getNext().getData());
+			head.setNext(head.getNext().getNext());
 		} else {
 			for(int i=1; i<position; i++) {
 				pre = cur;
-				cur = cur.next();
+				cur = cur.getNext();
 			}
 			item = cur.getData();
-			pre.setNext(cur.next());
+			pre.setNext(cur.getNext());
 		}
 		
 		length--;
@@ -127,7 +127,7 @@ public class MyLinkedList<T> implements MyList<T>{
 		LinkedListNode<T> cur = head;
 		while(cur != null) {
 			sb.append(cur.getData() + "\n");
-			cur = cur.next();
+			cur = cur.getNext();
 		}
 		return sb.toString();
 	}
