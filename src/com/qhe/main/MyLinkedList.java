@@ -35,14 +35,44 @@ public class MyLinkedList<T> implements MyList<T>{
 
 	@Override
 	public boolean insert(int position, T element) {
-		// TODO Auto-generated method stub
-		return false;
+		LinkedListNode<T> cur = head;
+		LinkedListNode<T> node = null;
+		if(position < 0 || position > length+1) {
+			System.err.println("Error, out of range");
+			return false;
+		}
+		
+		if(position == 1) {
+			node = new LinkedListNode<T>(head.getData());
+			node.setNext(head.next());
+			head.setNext(node);
+			head.setData(element);
+			
+		} else {
+			for(int i=1; i<position-1; i++) 
+				cur = cur.next();
+			node = new LinkedListNode<T>(element);
+			
+			node.setNext(cur.next());
+			cur.setNext(node);
+		}
+		
+		length++;
+		
+		return true;
 	}
 
 	@Override
 	public boolean replace(int position, T element) {
-		// TODO Auto-generated method stub
-		return false;
+		if(position<0 || position>length) {
+			System.err.println("Out of range");
+			return false;
+		}
+		LinkedListNode<T> cur = head;
+		for(int i=1; i<position; i++)
+			cur = cur.next();
+		cur.setData(element);
+		return true;
 	}
 
 	@Override
@@ -60,8 +90,30 @@ public class MyLinkedList<T> implements MyList<T>{
 
 	@Override
 	public T remove(int position) {
-		// TODO Auto-generated method stub
-		return null;
+		if(position<0 || position>length) {
+			System.err.println("Out of range");
+			return null;
+		}
+		
+		LinkedListNode<T> cur = head;
+		LinkedListNode<T> pre = null;
+		T item = null;
+		if(position == 1) {
+			item = head.getData();
+			head.setData(head.next().getData());
+			head.setNext(head.next().next());
+		} else {
+			for(int i=1; i<position; i++) {
+				pre = cur;
+				cur = cur.next();
+			}
+			item = cur.getData();
+			pre.setNext(cur.next());
+		}
+		
+		length--;
+		
+		return item;
 	}
 	
 	
@@ -79,5 +131,4 @@ public class MyLinkedList<T> implements MyList<T>{
 		}
 		return sb.toString();
 	}
-	
 }
